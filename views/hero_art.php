@@ -252,7 +252,7 @@ foreach ($flag_codes as $flag_key => $flag_value) {
 
 	// ANIMATION FEUILLES
 	// tableau des id_hero qui doivent avoir l'animation feuilles
-	const feuillesHeroIds = [5, 12, 35, 18, 21, 29, 16, 17, 4, 20, 14]; 
+	const feuillesHeroIds = [5, 12, 35, 18, 21, 29, 16, 17, 4, 20, 14, 28, 23, 7]; 
 	if (feuillesHeroIds.includes(idHero)) {
 		for (let i = 0; i < 30; i++) {
 			// creation de la div globale
