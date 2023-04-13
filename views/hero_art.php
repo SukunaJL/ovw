@@ -379,6 +379,31 @@ foreach ($flag_codes as $flag_key => $flag_value) {
 
 	}
 
+	// ANIMATION POUSSIERE
+	// si Ana ou Pharah(id:1 et 22) alors faire l'animation
+	if(idHero == 1 || idHero == 22) {
+				
+		const largeDust = document.createElement("img");
+		largeDust.setAttribute("src", `../public/largeDust.png`);
+		largeDust.classList.add("large-dust");
+		container.appendChild(largeDust);
+
+		const dust = document.createElement("img");
+		dust.setAttribute("src", `../public/dust.png`);
+		dust.classList.add("dust");
+		container.appendChild(dust);
+
+		// function shootDva(){
+		// 	shootDva1.classList.add("shoot-dva-anim");
+		// 	shootDva2.classList.add("shoot-dva-anim");
+		// 	setTimeout(() => {
+		// 		shootDva1.classList.remove("shoot-dva-anim");
+		// 		shootDva2.classList.remove("shoot-dva-anim");
+		// 	}, 2000);
+		// }
+
+	}
+
 </script>
 
 

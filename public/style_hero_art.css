@@ -214,7 +214,7 @@ transform: scaleX(-1) !important; */
 	}
 }
 
-/* //_________________ BLOCK DROITE DES SKILLS ____________________ */
+/* _________________ BLOCK DROITE DES SKILLS ____________________ */
 .skills-block {
 	position: relative;
 
@@ -665,3 +665,42 @@ transform: scaleX(-1) !important; */
 		opacity: 0;
 	}
 }
+/* ANIMATION POUSSIERE ANUBIS */
+.large-dust {
+	position: absolute;
+	z-index: 11;
+	bottom: 0;
+
+	opacity: 0.5;
+
+	width:  100%;
+	filter: contrast(40%);
+	animation: largeDustOpacityAnimation 5s ease-in-out infinite;
+}
+@keyframes largeDustOpacityAnimation {
+	0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 0.7;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+.dust {
+	width: 90%;	
+	filter: contrast(50%);
+	opacity: 0.2;
+	animation: dustAnimation 5s ease-in-out infinite;
+}
+@keyframes dustAnimation {
+	0% {
+		transform: translateX(-100%)
+	}
+	100% {
+		transform: translateX(100%)
+	}
+}
+
+
