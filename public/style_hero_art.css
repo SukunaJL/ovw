@@ -129,7 +129,7 @@ transform: scaleX(-1) !important; */
 	font-size: 2em;
 	bottom: 1em;
 	left: 0em;
-	z-index: 11;
+	z-index: 12;
 	background: radial-gradient(rgba(0, 0, 0, 0.7), transparent, transparent);
 	padding: 0.5em;
 	
@@ -143,7 +143,7 @@ transform: scaleX(-1) !important; */
 	font-style: italic;
 	top: 20em;
 	left: 2em;
-	z-index: 12;
+	z-index: 13;
 	/* background: rgba(0, 0, 0, 0.2); */
 	background: radial-gradient(rgba(0, 0, 0, 0.6), transparent);
 	padding: 0 1em;
@@ -641,5 +641,31 @@ transform: scaleX(-1) !important; */
 		bottom: 12%;
 		-webkit-transform: scaleX(1);
 		transform: scaleX(1);
+	}
+}
+
+/* ANIMATION SHOOT D-VA */
+.shoot-dva {
+	position: absolute;
+	z-index: 11;
+	bottom: 13em;
+	left: 5em;
+
+	/* opacity: 0; */
+
+	width:  15em;
+}
+.shoot-dva-anim {
+	animation: dvaShoot 0.1s ease-in-out 10;
+}
+@keyframes dvaShoot {
+	0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
 	}
 }

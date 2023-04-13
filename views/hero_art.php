@@ -61,7 +61,7 @@ foreach ($flag_codes as $flag_key => $flag_value) {
 	
 	<div class="block-content">
 		<div class="breathing-animation">
-			<img src="../public/src/fanart/<?= $hero->ID; ?>/<?= $hero->fanart; ?>">
+			<img class="fanart" src="../public/src/fanart/<?= $hero->ID; ?>/<?= $hero->fanart; ?>">
 			
 			<div class="replique">
 				<div class="signature"><?= str_replace($caracteres, $remplace, $hero->name); ?></div>
@@ -246,6 +246,9 @@ foreach ($flag_codes as $flag_key => $flag_value) {
 	// Conteneur des animations
 	const container = document.querySelector(".falling-leaves-container");
 
+	// Conteneur du fanart
+	const fanart = document.querySelector(".fanart");
+
 	// recupération de l'id_hero dans url
 	const urlParams = new URLSearchParams(window.location.search);
 	const idHero = parseInt(urlParams.get('id_hero'));
@@ -348,6 +351,27 @@ foreach ($flag_codes as $flag_key => $flag_value) {
 				}
 			}, 4000);
 		}
+	}
+
+	// ANIMATION DVA
+	// si DVa(id:11) alors faire l'animation
+	if(idHero == 11) {
+		setInterval(shootDva, 5000);
+		
+		
+
+		function shootDva(){
+			const shootDva = document.createElement("img");
+			shootDva.setAttribute("src", `../public/flash.png`);
+			shootDva.classList.add("shoot-dva");
+			fanart.appendChild(shootDva);
+
+			shootDva.classList.add("shoot-dva-anim");
+			setTimeout(() => {
+				shootDva.classList.remove("shoot-dva-anim");
+			}, 4000);
+		}
+
 	}
 
 </script>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 13 avr. 2023 à 07:54
+-- Généré le : jeu. 13 avr. 2023 à 07:55
 -- Version du serveur :  10.6.5-MariaDB
 -- Version de PHP : 5.6.40
 
@@ -25,24 +25,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `ietcv2__ovw_roles`
+-- Structure de la table `ietcv2__ovw_type_maps`
 --
 
-DROP TABLE IF EXISTS `ietcv2__ovw_roles`;
-CREATE TABLE IF NOT EXISTS `ietcv2__ovw_roles` (
-  `id_role` int(11) NOT NULL AUTO_INCREMENT,
-  `role_name` varchar(255) CHARACTER SET utf8mb3 NOT NULL,
-  PRIMARY KEY (`id_role`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+DROP TABLE IF EXISTS `ietcv2__ovw_type_maps`;
+CREATE TABLE IF NOT EXISTS `ietcv2__ovw_type_maps` (
+  `id_type_map` int(11) NOT NULL AUTO_INCREMENT,
+  `name_type` varchar(255) CHARACTER SET utf8mb3 NOT NULL,
+  PRIMARY KEY (`id_type_map`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `ietcv2__ovw_roles`
+-- Déchargement des données de la table `ietcv2__ovw_type_maps`
 --
 
-INSERT INTO `ietcv2__ovw_roles` (`id_role`, `role_name`) VALUES
-(1, 'Tank'),
-(2, 'DPS'),
-(3, 'Healer');
+INSERT INTO `ietcv2__ovw_type_maps` (`id_type_map`, `name_type`) VALUES
+(1, 'Escort'),
+(2, 'Hybrid'),
+(3, 'Control'),
+(4, 'Push'),
+(5, 'Assault'),
+(6, 'Arcades/Autres');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
