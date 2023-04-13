@@ -32,16 +32,9 @@ $allHeroes = HEROES::getsAllHeroesInfos();
 		animation: scroll 300s linear infinite;
 		background-size: 100%;
 
-		/* display: flex;
-		flex-direction:row;
-		flex-wrap: wrap;
-		justify-content: center;
-		align-items: center; */
 		display: grid;
 		grid-template-columns: repeat(8, 1fr);
 		grid-template-rows: repeat(5, 1fr);
-		/* grid-gap: 10px; */
-
 
 		padding: 1em;
 		/* margin: 0.5em; */

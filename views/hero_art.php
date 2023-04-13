@@ -381,7 +381,7 @@ foreach ($flag_codes as $flag_key => $flag_value) {
 
 	// ANIMATION POUSSIERE
 	// si Ana ou Pharah(id:1 et 22) alors faire l'animation
-	if(idHero == 1 || idHero == 22) {
+	if(idHero == 1  || idHero == 22) {
 				
 		const largeDust = document.createElement("img");
 		largeDust.setAttribute("src", `../public/largeDust.png`);
