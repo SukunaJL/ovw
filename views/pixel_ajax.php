@@ -7,7 +7,7 @@ $genjiHeight = $heroData->ID == 16 ? "genji-height" : "";
 ?>
 <a class="valided" href="http://www.sitetest.local/ovw/views/hero_art.php?id_hero=<?= $heroData->ID; ?>">
 	<span>Valider</span>
-	<i class="fas fa-angle-right"></i>
+	<i class="fas fa-angle-left"></i>
 </a>
 
 <img class="pixel <?= $genjiHeight; ?>" src="../public/src/spray/<?= $heroData->ID; ?>/<?= $heroData->pixel; ?>">

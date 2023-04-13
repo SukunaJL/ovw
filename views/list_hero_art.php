@@ -61,6 +61,21 @@ $allHeroes = HEROES::getsAllHeroesInfos();
 		height:  5em;
 		width :  5em;
 	}
+	@keyframes selectColor {
+		0% {
+			background: white;
+		}
+		50% {
+			background: cyan;
+		}
+		100% {
+			background: white;
+		}
+	}
+	.div-selection-color {
+		animation: selectColor 0.2s ease-in-out 5;
+	}
+
 	.hero-case img {
 		padding: 0.1em;
 		max-height:  5em;
@@ -95,18 +110,6 @@ $allHeroes = HEROES::getsAllHeroesInfos();
 		right: 12%;
 
 		animation: breathing 5s ease-in-out infinite;
-	}
-	.valided {
-		position: absolute;
-		z-index: 5;
-		color: red;
-		font-weight: bold;
-		/* top: 90%; */
-		padding: 1em;
-		margin: 1em;
-		margin-left: 1em;
-		background: silver;
-		border-radius: 0.5em;
 	}
 	.genji-height {
 		right: 7%;
@@ -146,11 +149,6 @@ $allHeroes = HEROES::getsAllHeroesInfos();
 
 		animation: select 1s ease-in-out infinite;
 	}
-	.div-selection:active {
-		border: 3px solid red;
-
-		animation: select 0.1s ease-in-out 10;
-	}
 	@keyframes select {
 		0% {
 			transform: scale(1.02);
@@ -162,13 +160,44 @@ $allHeroes = HEROES::getsAllHeroesInfos();
 			transform: scale(1.02);
 		}
 	}
+	.valided {
+		position: absolute;
+		width: 5em;
+		display:flex;
+		justify-content: space-between;
+		align-items: center;
+		z-index: 5;
+		color: red;
+		font-size: 1.2em;
+		font-weight: bold;
+		padding: 1em;
+		margin: 1em;
+		margin-left: 1em;
+		background: silver;
+		border-radius: 0.5em;
+		text-decoration: none;
+	}
+	.valided:hover {
+		color: silver;
+		background: orangered;
+		box-shadow: 0 0 .25rem white, -.125rem -.125rem 1rem white, .125rem .125rem 1rem white;
+	}
+	.valided i {
+		font-size: 1.25em;
+		transition: transform 1s;
+	}
+	.valided:hover i {
+		transform: rotate(180deg);
+
+	}
+
 </style>
 
 <div class="main">
 	<div class="select-hero">
 		<? foreach ($allHeroes as $hero){ ?>
 			
-			<a class="hero-case" href="#" data-id-hero="<?= $hero->id_hero;?>">
+			<a class="hero-case" href="#" data-id-hero="<?= $hero->id_hero;?>" onclick="validatedColor(this);">
 				<div class="div-selection"></div>
 				<img src="../public/src/spray/<?= $hero->id_hero; ?>/<?= $hero->cute; ?>">
 			</a>
@@ -198,4 +227,11 @@ $allHeroes = HEROES::getsAllHeroesInfos();
 
 		});
 	});
+// clique pour validé le choix
+	function validatedColor(div){
+		div.classList.add("div-selection-color");
+		setTimeout(() => {
+			div.classList.remove("div-selection-color");
+		}, 2000);
+	}
 </script>

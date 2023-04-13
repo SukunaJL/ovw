@@ -55,7 +55,7 @@ foreach ($flag_codes as $flag_key => $flag_value) {
 		</div>
 		
 
-		<img src="../public/src/<?= $hero->avatar; ?>">
+		<img src="../public/src/spray/<?= $hero->ID; ?>/<?= $hero->cute; ?>">
 	</div>
 	
 	
@@ -247,7 +247,7 @@ foreach ($flag_codes as $flag_key => $flag_value) {
 	const container = document.querySelector(".falling-leaves-container");
 
 	// Conteneur du fanart
-	const fanart = document.querySelector(".fanart");
+	const fanart = document.querySelector(".breathing-animation");
 
 	// recupération de l'id_hero dans url
 	const urlParams = new URLSearchParams(window.location.search);
@@ -360,12 +360,12 @@ foreach ($flag_codes as $flag_key => $flag_value) {
 				
 		const shootDva1 = document.createElement("img");
 		shootDva1.setAttribute("src", `../public/flash.png`);
-		shootDva1.classList.add("shoot-dva", "shoot-dva-anim", "shoot-dva-1");
+		shootDva1.classList.add("shoot-dva", "shoot-dva-1");
 		fanart.appendChild(shootDva1);
 
 		const shootDva2 = document.createElement("img");
 		shootDva2.setAttribute("src", `../public/flash.png`);
-		shootDva2.classList.add("shoot-dva", "shoot-dva-anim", "shoot-dva-2");
+		shootDva2.classList.add("shoot-dva", "shoot-dva-2");
 		fanart.appendChild(shootDva2);
 
 		function shootDva(){

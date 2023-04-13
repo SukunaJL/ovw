@@ -18,20 +18,8 @@ body {
 	margin: 0;
 	border: 1em groove red;
 	overflow: hidden;
-	/* animation: border-animation 10s ease-in-out infinite; */
 	z-index: 198;
 }
-/* @keyframes border-animation {
-	0% {
-		border-color: #000;
-	}
-	50% {
-		border-color: #f00;
-	}
-	100% {
-		border-color: #000;
-	}
-} */
 
 .header-name {
 	padding:0 2em;
@@ -52,8 +40,11 @@ body {
 .header img {
 	width: 5em;
 	margin: 1em 3em;
-	border: 3px solid red;
-	border-radius: 0.5em;
+	/* border: 3px solid red;
+	border-radius: 0.5em; */
+	background: radial-gradient(white, silver, transparent, transparent);
+	padding: 0.5em;
+	margin-bottom: 0.5em;
 }
 .retour {
 	text-decoration: none;
