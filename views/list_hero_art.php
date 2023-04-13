@@ -32,12 +32,19 @@ $allHeroes = HEROES::getsAllHeroesInfos();
 		animation: scroll 300s linear infinite;
 		background-size: 100%;
 
-		display: flex;
+		/* display: flex;
 		flex-direction:row;
 		flex-wrap: wrap;
 		justify-content: center;
-		align-items: center;
-		padding: 2em;
+		align-items: center; */
+		display: grid;
+		grid-template-columns: repeat(8, 1fr);
+		grid-template-rows: repeat(5, 1fr);
+		/* grid-gap: 10px; */
+
+
+		padding: 1em;
+		/* margin: 0.5em; */
 		border-radius:0.5em 0 0 0.5em;
 	}
 	@keyframes scroll {
@@ -45,19 +52,20 @@ $allHeroes = HEROES::getsAllHeroesInfos();
 			background-position:0px -3000px;
 		}
 	}
-	.hero-case img {
-		/* width:  5em; */
-		height: 5em;
+	.hero-case {
+		position: relative;
 		border: 3px solid white;
 		border-radius: 0.5em;
 		background: silver;
 		margin: 0.7em;
+		height:  5em;
+		width :  5em;
 	}
-	.hero-case img:hover {
-		border: 3px solid silver;
-		/* box-shadow: 0 0 .25rem white, -.125rem -.125rem 1rem white, .125rem .125rem 1rem white; */
-		background: lightcyan;
-		/* transform: scale(1.3); */
+	.hero-case img {
+		padding: 0.1em;
+		max-height:  5em;
+		max-width :  5em;
+		
 	}
 
 	.scene {
@@ -98,7 +106,7 @@ $allHeroes = HEROES::getsAllHeroesInfos();
 		margin: 1em;
 		margin-left: 1em;
 		background: silver;
-		border-radius: 1em;
+		border-radius: 0.5em;
 	}
 	.genji-height {
 		right: 7%;
@@ -116,14 +124,55 @@ $allHeroes = HEROES::getsAllHeroesInfos();
 			transform: scale(1) translateY(0);
 		}
 	}
+
+	.div-selection {
+		position: absolute;
+
+		top : -0.5em;
+		left: -0.5em;
+
+		padding: 0.2em;
+
+		height: 5.3em;
+		width : 5.3em;
+
+		/* border: 3px solid red; */
+		border-radius: 0.5em;
+		/* margin: 0.1em;
+		padding: 0; */
+	}
+	.div-selection:hover {
+		border: 3px solid red;
+
+		animation: select 1s ease-in-out infinite;
+	}
+	.div-selection:active {
+		border: 3px solid red;
+
+		animation: select 0.1s ease-in-out 10;
+	}
+	@keyframes select {
+		0% {
+			transform: scale(1.02);
+		}
+		50% {
+			transform: scale(1.08);
+		}
+		100% {
+			transform: scale(1.02);
+		}
+	}
 </style>
 
 <div class="main">
 	<div class="select-hero">
 		<? foreach ($allHeroes as $hero){ ?>
+			
 			<a class="hero-case" href="#" data-id-hero="<?= $hero->id_hero;?>">
+				<div class="div-selection"></div>
 				<img src="../public/src/spray/<?= $hero->id_hero; ?>/<?= $hero->cute; ?>">
 			</a>
+			
 		<? } ?>
 
 

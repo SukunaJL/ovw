@@ -356,20 +356,25 @@ foreach ($flag_codes as $flag_key => $flag_value) {
 	// ANIMATION DVA
 	// si DVa(id:11) alors faire l'animation
 	if(idHero == 11) {
-		setInterval(shootDva, 5000);
-		
-		
+		setInterval(shootDva, 3000);
+				
+		const shootDva1 = document.createElement("img");
+		shootDva1.setAttribute("src", `../public/flash.png`);
+		shootDva1.classList.add("shoot-dva", "shoot-dva-anim", "shoot-dva-1");
+		fanart.appendChild(shootDva1);
+
+		const shootDva2 = document.createElement("img");
+		shootDva2.setAttribute("src", `../public/flash.png`);
+		shootDva2.classList.add("shoot-dva", "shoot-dva-anim", "shoot-dva-2");
+		fanart.appendChild(shootDva2);
 
 		function shootDva(){
-			const shootDva = document.createElement("img");
-			shootDva.setAttribute("src", `../public/flash.png`);
-			shootDva.classList.add("shoot-dva");
-			fanart.appendChild(shootDva);
-
-			shootDva.classList.add("shoot-dva-anim");
+			shootDva1.classList.add("shoot-dva-anim");
+			shootDva2.classList.add("shoot-dva-anim");
 			setTimeout(() => {
-				shootDva.classList.remove("shoot-dva-anim");
-			}, 4000);
+				shootDva1.classList.remove("shoot-dva-anim");
+				shootDva2.classList.remove("shoot-dva-anim");
+			}, 2000);
 		}
 
 	}

@@ -89,12 +89,11 @@ body {
 }
 /* _____________________________ */
 .breathing-animation {
-	/* display: inline-block;
-	position: relative; */
+	/* position: relative; */
 	height:100%;
 	width: 30%;
 }
-.breathing-animation img {
+.fanart {
 	position: absolute;
 	z-index: 10;
 	height:100%;
@@ -648,12 +647,18 @@ transform: scaleX(-1) !important; */
 .shoot-dva {
 	position: absolute;
 	z-index: 11;
-	bottom: 13em;
-	left: 5em;
 
-	/* opacity: 0; */
+	opacity: 0;
 
 	width:  15em;
+}
+.shoot-dva-1 {
+	bottom: 5.5em;
+	left: 5em;
+}
+.shoot-dva-2 {
+	bottom: 5.5em;
+	left: -5.5em;
 }
 .shoot-dva-anim {
 	animation: dvaShoot 0.1s ease-in-out 10;
