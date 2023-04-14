@@ -247,7 +247,7 @@ foreach ($flag_codes as $flag_key => $flag_value) {
 	const container = document.querySelector(".falling-leaves-container");
 
 	// Conteneur du fanart
-	const fanart = document.querySelector(".breathing-animation");
+	const fanart = document.querySelector("body");
 
 	// recupération de l'id_hero dans url
 	const urlParams = new URLSearchParams(window.location.search);
@@ -353,7 +353,7 @@ foreach ($flag_codes as $flag_key => $flag_value) {
 		}
 	}
 
-	// ANIMATION DVA
+	//! ANIMATION DVA
 	// si DVa(id:11) alors faire l'animation
 	if(idHero == 11) {
 		setInterval(shootDva, 3000);
@@ -392,18 +392,31 @@ foreach ($flag_codes as $flag_key => $flag_value) {
 		dust.setAttribute("src", `../public/dust.png`);
 		dust.classList.add("dust");
 		container.appendChild(dust);
-
-		// function shootDva(){
-		// 	shootDva1.classList.add("shoot-dva-anim");
-		// 	shootDva2.classList.add("shoot-dva-anim");
-		// 	setTimeout(() => {
-		// 		shootDva1.classList.remove("shoot-dva-anim");
-		// 		shootDva2.classList.remove("shoot-dva-anim");
-		// 	}, 2000);
-		// }
-
 	}
 
+	// ANIMATION JUNK ET ROAD EN MOTO
+	const junkHeroIds = [9, 10, 34]; 
+	if (junkHeroIds.includes(idHero)) {
+		const divAnim = document.createElement("div");
+		divAnim.classList.add("div-anim");
+		container.appendChild(divAnim);
+
+		const idiots = document.createElement("img");
+		idiots.setAttribute("src", `../public/junkTeam.png`);
+		idiots.classList.add("idiots");
+		divAnim.appendChild(idiots);
+
+		for (let i = 0; i < 30; i++) {
+			const smoke = document.createElement("img");
+			smoke.setAttribute("src", `../public/smoke-junk.png`);
+			smoke.classList.add("smoke", "smokeJS");
+
+			divAnim.appendChild(smoke);
+
+			smoke.style.transform = "translateY(-400%) translateX(" + (Math.floor(Math.random() * 201) - 100) + "%)";
+			smoke.style.animationDelay = Math.random() * 2.9 + 0.1 + "s";
+		}
+	}
 </script>
 
 

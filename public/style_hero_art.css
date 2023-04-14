@@ -644,12 +644,16 @@ transform: scaleX(-1) !important; */
 	width:  15em;
 }
 .shoot-dva-1 {
-	bottom: 5.5em;
-	left: 5em;
+	position: absolute;
+
+	bottom: 12%;
+	left: 5.5%;
 }
 .shoot-dva-2 {
-	bottom: 5.5em;
-	left: -5.5em;
+	position: absolute;
+	
+	bottom: 13%;
+	left: -6%;
 }
 .shoot-dva-anim {
 	animation: dvaShoot 0.1s ease-in-out 10;
@@ -702,5 +706,58 @@ transform: scaleX(-1) !important; */
 		transform: translateX(100%)
 	}
 }
+/* ANIMATION JUNK ET ROAD EN MOTO */
+.div-anim {
+	position : absolute;
 
+	top: 50%;
+	left: 60%;
+}
+.idiots {
+	position : absolute;
+	width: 10em;
+	z-index: 5;
 
+	-webkit-animation: vroom 0.1s ease-in-out infinite alternate;
+}
+
+@keyframes vroom {
+	0% {
+		transform: scale(1.01) translateY(1%) translateX(-1%);
+		height:10.5em;
+		top: 49.5%;
+	}
+	50% {
+		transform: scale(1) translateY(0);
+		height:10em;
+		top: 50%;
+	}
+	100% {
+		transform: scale(0.99) translateY(-1%) translateX(1%);
+		height:9.5em;
+		top: 50.5%;
+	}
+}
+
+.smoke {
+	position : absolute;
+	z-index: 4;
+	top: 0;
+
+	width    : 10em;
+
+	filter: invert(100%);
+	opacity: 0;
+}
+
+.smokeJS {
+	-webkit-animation: smokeJS 3s ease-in-out 2.5s infinite;
+}
+@keyframes smokeJS {
+	0% {
+		transform: translateY(0%) translateX(50%);
+	}
+	10% {
+		opacity: 1;
+	}
+}
