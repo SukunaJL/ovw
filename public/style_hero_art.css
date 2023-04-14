@@ -761,3 +761,41 @@ transform: scaleX(-1) !important; */
 		opacity: 1;
 	}
 }
+
+/* ANIMATION MERCY MOVE GIBRALTAR */
+.mercy-pixel {
+	position: absolute;
+	z-index: 19;
+
+	top: 14%;
+	right: 15%;
+	width:8%;
+}
+.mercy-hidden-left {
+	position: absolute;
+	z-index: 20;
+
+	top: -15.6%;
+	left: 24%;
+	width:14.6%;
+}
+
+.mercy-hidden-right {
+	position: absolute;
+	z-index: 20;
+
+	top: -15.6%;
+	right: 11.5%;
+	width:14.6%;
+}
+.moveMercy {
+	-webkit-animation: moveMercy 4s ease-in-out 2s infinite;
+}
+@keyframes moveMercy {
+	0% {
+		transform: translateY(0%) translateX(0%);
+	}
+	100% {
+		transform: translateY(50%) translateX(-575%);
+	}
+}

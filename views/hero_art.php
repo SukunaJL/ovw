@@ -417,6 +417,24 @@ foreach ($flag_codes as $flag_key => $flag_value) {
 			smoke.style.animationDelay = Math.random() * 2.9 + 0.1 + "s";
 		}
 	}
+
+	// ANIMATION ANIMATION MERCY MOVE GIBRALTAR
+	if (idHero == 2) {
+		const mercyPixel = document.createElement("img");
+		mercyPixel.setAttribute("src", `../public/mercyMove.gif`);
+		mercyPixel.classList.add("mercy-pixel", "moveMercy");
+		container.appendChild(mercyPixel);
+
+		const mercyRight = document.createElement("img");
+		mercyRight.setAttribute("src", `../public/mercy-hidden-right.png`);
+		mercyRight.classList.add("mercy-hidden-right");
+		container.appendChild(mercyRight);
+
+		const mercyLeft = document.createElement("img");
+		mercyLeft.setAttribute("src", `../public/mercy-hidden-left.png`);
+		mercyLeft.classList.add("mercy-hidden-left");
+		container.appendChild(mercyLeft);
+	}
 </script>
 
 
