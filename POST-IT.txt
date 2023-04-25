@@ -1,2 +1,67 @@
 
 GERER LES FLOCON QUI TOMBE, SUR MEI !!
+
+
+
+
+
+
+
+MODIFIER KEYFRAME :
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Exemple de modification de keyframe en JS</title>
+  <style>
+    @keyframes monKeyframe {
+      0% { background-color: red; }
+      50% { background-color: yellow; }
+      100% { background-color: green; }
+    }
+    #maDiv {
+      width: 100px;
+      height: 100px;
+      background-color: blue;
+      animation-name: monKeyframe;
+      animation-duration: 5s;
+      animation-iteration-count: infinite;
+    }
+  </style>
+</head>
+<body>
+  <div id="maDiv"></div>
+
+  <button onclick="modifierKeyframe()">Modifier le keyframe</button>
+
+  <script>
+    function modifierKeyframe() {
+      // Récupération de l'élément <style> qui contient les règles CSS
+      var styleElement = document.getElementsByTagName("style")[0];
+
+      // Récupération de la feuille de style
+      var styleSheet = styleElement.sheet;
+
+      // Récupération de la règle de keyframe "monKeyframe"
+      var keyframesRule = null;
+      for (var i = 0; i < styleSheet.cssRules.length; i++) {
+        var rule = styleSheet.cssRules[i];
+        if (rule.type == CSSRule.KEYFRAMES_RULE && rule.name == "monKeyframe") {
+          keyframesRule = rule;
+          break;
+        }
+      }
+
+      // Modification des règles pour le keyframe "monKeyframe"
+      if (keyframesRule != null) {
+        var keyframes = keyframesRule.cssRules;
+        keyframes[0].style.backgroundColor = "orange"; // Modification de la règle pour le 0%
+        keyframes[keyframes.length - 1].style.backgroundColor = "purple"; // Modification de la règle pour le 100%
+      }
+    }
+  </script>
+</body>
+</html>
+
+random de 0% a 100% :
+img.style.transform = "translateY(" + (Math.floor(Math.random() * 101)) + "%) translateX(" + (Math.floor(Math.random() * 101)) + "%)";

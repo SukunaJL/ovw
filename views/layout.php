@@ -1,4 +1,14 @@
 <? 
+session_start();
+
+if(isset($_GET['logout']) && !empty($_GET['logout'])) {
+	if($_GET['logout']) {
+		
+		session_destroy();
+		
+		header('Location: http://www.sitetest.local/ovw/index.php');
+	}
+}
 
 ?>
 
@@ -77,6 +87,45 @@
 			background: silver;
 			color: black;
 		}
+		.login {
+			position: absolute;
+			display: flex;
+			flex-direction: column;
+			top: -1em;
+			right: 0;
+			padding: 0.5em;
+			padding-top: 1em;
+			border-radius: 0 0 0 1em;
+			border-top: none;
+			border-right: none;
+			border-bottom: 3px solid red;
+			border-left: 3px solid red;
+			background: black;
+		}
+		.login a {
+			background:none;
+			font-size: 1em;
+		}
+		.login a:hover {
+			text-shadow: 0 0 .25rem gold, -.125rem -.125rem 1rem gold, .125rem .125rem 1rem gold;
+			color: white;
+		}
+		#avatar-user {
+			color: green;
+			background: red;
+			padding: 1em;
+			margin: 0.5em;
+			border-radius: 100%;
+			width: 1em;
+			height: 1em;
+		}
+		#avatar-user:hover {
+			box-shadow: 0 0 .25rem gold, -.125rem -.125rem 1rem gold, .125rem .125rem 1rem gold;
+		}
+		.logout {
+			font-size: 1em;
+			color: white;
+		}
 	</style>
 </head>
 <body>
@@ -88,6 +137,21 @@
 			<a href="http://www.sitetest.local/ovw/views/list_hero_art.php">ART-OF-HERO</a>
 			<a href="http://www.sitetest.local/ovw/views/list_maps.php">CARTES</a>
 			<a class="link-team" href="http://www.sitetest.local/ovw/views/team_compo.php">TEAM COMPO</a>
+			
+			<div class="login">
+				<? if(isset($_SESSION['email']) && !empty($_SESSION['email'])) { ?>
+					<a id="avatar-user">
+						<?= $_SESSION['email']; ?>
+					</a>
+					<a href="http://www.sitetest.local/ovw/index.php?logout=true">
+						<!-- Logout -->
+						<i class="fas fa-sign-out-alt logout"></i>
+					</a>
+				<? } else { ?>
+					<a href="http://www.sitetest.local/ovw/views/log_in.php">Connecter</a>
+					<a href="http://www.sitetest.local/ovw/views/sign_up.php">Enregistrer</a>
+				<? } ?>
+			</div>
 			
 		</nav>
 	</header>
