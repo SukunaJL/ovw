@@ -9,13 +9,13 @@ if(isset($_POST['submit-login'])) {
 	$user = $u->login($_POST['mail'], $_POST['pwd']);
 
 	if($user) {
-		header("Location=http://www.sitetest.local/ovw/index.php");
-		exit();
+		header("Location=http://www.sitetest.local/ovw/views/list_hero.php");
 	} else {
 		$error = "mail ou mot de passe incorrect.";
 	}
 	
 }
+
 ?>
 <style>
 	.form-login {
