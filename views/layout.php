@@ -6,7 +6,7 @@ if(isset($_GET['logout']) && !empty($_GET['logout'])) {
 		
 		session_destroy();
 		
-		header('Location: http://www.sitetest.local/ovw/index.php');
+		header('Location: http://www.sitetest.local/ovw/views/index.php');
 	}
 }
 
@@ -111,13 +111,21 @@ if(isset($_GET['logout']) && !empty($_GET['logout'])) {
 			color: white;
 		}
 		#avatar-user {
-			color: green;
+			/* color: green; */
 			background: red;
-			padding: 1em;
+			/* padding: 1em; */
 			margin: 0.5em;
 			border-radius: 100%;
-			width: 1em;
-			height: 1em;
+			width: 2em;
+			height: 2em;
+		}
+		#avatar-user img {
+			display:flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			border-radius: 100%;
+
 		}
 		#avatar-user:hover {
 			box-shadow: 0 0 .25rem gold, -.125rem -.125rem 1rem gold, .125rem .125rem 1rem gold;
@@ -130,7 +138,7 @@ if(isset($_GET['logout']) && !empty($_GET['logout'])) {
 </head>
 <body>
 	<header>
-		<a href="http://www.sitetest.local/ovw/index.php"><h1 class="main-title">overwatch</h1></a>
+		<a href="http://www.sitetest.local/ovw/views/index.php"><h1 class="main-title">overwatch</h1></a>
 		<nav>
 			<a class="link-gestion" href="http://www.sitetest.local/ovw/views/links_gestion.php">GESTION DES DONNÉES</a>
 			<a href="http://www.sitetest.local/ovw/views/list_hero.php">HEROS DATA</a>
@@ -140,10 +148,10 @@ if(isset($_GET['logout']) && !empty($_GET['logout'])) {
 			
 			<div class="login">
 				<? if(isset($_SESSION['email']) && !empty($_SESSION['email'])) { ?>
-					<a id="avatar-user">
-						<?= $_SESSION['email']; ?>
+					<a id="avatar-user" href="http://www.sitetest.local/ovw/views/profil.php">
+						<img src="../public/src/<?= $_SESSION['avatar']; ?>">
 					</a>
-					<a href="http://www.sitetest.local/ovw/index.php?logout=true">
+					<a href="http://www.sitetest.local/ovw/views/index.php?logout=true">
 						<!-- Logout -->
 						<i class="fas fa-sign-out-alt logout"></i>
 					</a>

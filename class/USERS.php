@@ -42,7 +42,7 @@ class USERS {
 		$this->password 	= $userInfos->password;
 		$this->isSuperAdmin = (int)$userInfos->is_super_admin;
 		$this->isAdmin		= (int)$userInfos->is_admin;
-		$this->avatarHeroId = (int)$userInfos->avatar_hero_id;
+		$this->avatar		= $userInfos->avatar_hero_id;
 
 	}
 //*_________________________________
@@ -63,7 +63,7 @@ class USERS {
 			$_SESSION['email'] = $user->mail;
 			$_SESSION['isSuperAdmin'] = $user->is_super_admin;
 			$_SESSION['isAdmin'] = $user->is_admin;
-			$_SESSION['avatarHeroId'] = $user->avatar_hero_id;
+			$_SESSION['avatar'] = $user->avatar_hero_id;
 			return true;
 		} else {
 			return false;
@@ -126,7 +126,7 @@ class USERS {
 			$_SESSION['email'] = $result->mail;
 			$_SESSION['isSuperAdmin'] = $result->is_super_admin;
 			$_SESSION['isAdmin'] = $result->is_admin;
-			$_SESSION['avatarHeroId'] = $result->avatar_hero_id;
+			$_SESSION['avatar'] = $result->avatar_hero_id;
 			return true;
 		} else {
 			return false;

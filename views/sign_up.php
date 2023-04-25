@@ -18,7 +18,7 @@ if(isset($_POST['submit-new-user'])) {
 			if($user) {
 				$valided = "Vous avez bien été enregisté. Vous allez être redirigé vers la page d'accueil";
 				$disabled = "disabled";
-				header("refresh:3;url=http://www.sitetest.local/ovw/index.php");
+				header("refresh:3;url=http://www.sitetest.local/ovw/views/index.php");
 			} else {
 				$error = "une erreur est survenu.";
 			}

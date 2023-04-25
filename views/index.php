@@ -1,6 +1,6 @@
 <? include_once $_SERVER['DOCUMENT_ROOT']."../devt.loguy.fr/class/include.php";
 
-require './views/layout.php';
+require './layout.php';
 
 ?>
 <style>
@@ -29,5 +29,5 @@ require './views/layout.php';
 </style>
 <div class="index-logo">
 	<!-- <img src="./title.png"/> -->
-	<img src="./icon_over.gif"/>
+	<img src="../icon_over.gif"/>
 </div>

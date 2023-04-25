@@ -269,6 +269,23 @@ class HEROES {
 	}
 
 
+	static function getAllImagesHeroes(){
+		$sql ="	SELECT
+					id_hero,
+					fanart,
+					avatar,
+					pixel,
+					cute
+				FROM
+					".DBNAME_PS."_ovw_heroes";
+				
+		$result = DB::gets($sql);
 
+		if($result){
+			return $result;
+		} else {
+			return false;
+		}
+	}
 	
 }
