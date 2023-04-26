@@ -90,14 +90,16 @@ if(isset($_GET['logout']) && !empty($_GET['logout'])) {
 		.login {
 			position: absolute;
 			display: flex;
-			flex-direction: column;
-			top: -1em;
+			justify-content: space-around;
+			align-items: center;
+			flex-direction: row;
+			top: 0;
 			right: 0;
+			width: 14em;
+			height: 3em;
 			padding: 0.5em;
 			padding-top: 1em;
 			border-radius: 0 0 0 1em;
-			border-top: none;
-			border-right: none;
 			border-bottom: 3px solid red;
 			border-left: 3px solid red;
 			background: black;
@@ -111,13 +113,14 @@ if(isset($_GET['logout']) && !empty($_GET['logout'])) {
 			color: white;
 		}
 		#avatar-user {
-			/* color: green; */
 			background: red;
-			/* padding: 1em; */
+			padding: 0;
 			margin: 0.5em;
 			border-radius: 100%;
-			width: 2em;
-			height: 2em;
+			min-width : 3em;
+			max-width : 3em;
+			min-height: 3em;
+			max-height: 3em;
 		}
 		#avatar-user img {
 			display:flex;
@@ -131,7 +134,7 @@ if(isset($_GET['logout']) && !empty($_GET['logout'])) {
 			box-shadow: 0 0 .25rem gold, -.125rem -.125rem 1rem gold, .125rem .125rem 1rem gold;
 		}
 		.logout {
-			font-size: 1em;
+			font-size: 1.5em;
 			color: white;
 		}
 	</style>
@@ -151,13 +154,14 @@ if(isset($_GET['logout']) && !empty($_GET['logout'])) {
 					<a id="avatar-user" href="http://www.sitetest.local/ovw/views/profil.php">
 						<img src="../public/src/<?= $_SESSION['avatar']; ?>">
 					</a>
+					<div style="font-size: 0.9em;color:white;">Bienvenue <span style="font-weight:bold;font-size: 1.2em;"><?= $_SESSION['pseudo']; ?></span></div>
 					<a href="http://www.sitetest.local/ovw/views/index.php?logout=true">
 						<!-- Logout -->
 						<i class="fas fa-sign-out-alt logout"></i>
 					</a>
 				<? } else { ?>
 					<a href="http://www.sitetest.local/ovw/views/log_in.php">Connecter</a>
-					<a href="http://www.sitetest.local/ovw/views/sign_up.php">Enregistrer</a>
+					<a href="http://www.sitetest.local/ovw/views/sign_up.php" style="border-left: 1px double silver;border-radius:0;">Enregistrer</a>
 				<? } ?>
 			</div>
 			

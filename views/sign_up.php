@@ -6,22 +6,48 @@ require '../class/USERS.php';
 $disabled = "";
 
 if(isset($_POST['submit-new-user'])) {
-	if(($_POST['pwd'] === $_POST['pwd-repeat']) && (!empty($_POST['pwd']))){
+	if(($_POST['pwd'] === $_POST['pwd-repeat'])){
 		$u = new USERS();
 		$mailExisted = $u->mailExisted($_POST['mail']);
 
 		if($mailExisted) {
 			$errorMailExisted = "Cette adresse mail existe déja.";
 		} else {
-			$user = $u->register($_POST['mail'], $_POST['pwd']);
-
-			if($user) {
-				$valided = "Vous avez bien été enregisté. Vous allez être redirigé vers la page d'accueil";
-				$disabled = "disabled";
-				header("refresh:3;url=http://www.sitetest.local/ovw/views/index.php");
+			
+			// Vérifie que le mot de passe contient au moins une majuscule
+			if (!preg_match('/[A-Z]/', $_POST['pwd'])) {
+				$errorStrengthPwd = "Votre mot de passe dois contenir au moins une majuscule.";
+				
+				// Vérifie que le mot de passe contient au moins une minuscule
+			} else if (!preg_match('/[a-z]/', $_POST['pwd'])) {
+				$errorStrengthPwd = "Votre mot de passe dois contenir au moins une minuscule.";
+				
+				// Vérifie que le mot de passe contient au moins un chiffre
+			} else if (!preg_match('/\d/', $_POST['pwd'])) {
+				$errorStrengthPwd = "Votre mot de passe dois contenir au moins un chiffre.";
+				
+				// Vérifie que le mot de passe contient au moins un caractère spécial
+			} else if (!preg_match('/[^a-zA-Z\d]/', $_POST['pwd'])) {
+				$errorStrengthPwd = "Votre mot de passe dois contenir au moins un caractère spécial.";
+				
+				// Vérifie que le mot de passe a une longueur minimale de 8 caractères
+			} else if (strlen($_POST['pwd']) < 8) {
+				$errorStrengthPwd = "Votre mot de passe dois faire une longueur minimale de 8 caractères.";
+				
 			} else {
-				$error = "une erreur est survenu.";
+
+				$user = $u->register($_POST['mail'], $_POST['pwd'], $_POST['pseudo']);
+
+				if($user) {
+					$valided = "Vous avez bien été enregisté. Vous allez être redirigé vers la page d'accueil";
+					$disabled = "disabled";
+					header("refresh:3;url=http://www.sitetest.local/ovw/views/index.php");
+				} else {
+					$error = "une erreur est survenu.";
+				}
+
 			}
+
 		}
 
 
@@ -59,10 +85,11 @@ if(isset($_POST['submit-new-user'])) {
 	.form-signup button {
 		margin-top: 1em;
 		padding: 0.5em;
-		border: 2px outset black;
+		border: 3px outset black;
+		border-radius: 0.5em;
 	}
 	.form-signup button:hover {
-		border: 2px inset black;
+		border: 3px inset black;
 	}
 	#mail {
 		margin-bottom: 2em;
@@ -79,8 +106,13 @@ if(isset($_POST['submit-new-user'])) {
 		color: green;
 		font-weight: bold;
 		font-size: 1.2em;
-		margin-bottom: 1em;
+		/* margin-bottom: 1em; */
 		text-align: center;
+		text-shadow: 0 0 .25rem gold, -.125rem -.125rem 1rem gold, .125rem .125rem 1rem gold;
+
+		background:rgba(230, 205, 61, 0.5);
+		border-radius: 1em;
+		padding:0.5em;
 	}
 	.error {
 		color: red;
@@ -92,6 +124,11 @@ if(isset($_POST['submit-new-user'])) {
 		font-weight: bold;
 		font-size: 0.7em;
 	}
+	.carac-max {
+		font-size: 0.7em;
+		font-weight: bold;
+		margin-bottom: 2em;
+	}
 </style>
 <h1>Enregistrement</h1>
 
@@ -100,12 +137,18 @@ if(isset($_POST['submit-new-user'])) {
 	<div class="error"><?= isset($error) ? $error : ""; ?></div>
 	<div class="error"><?= isset($errorMailExisted) ? $errorMailExisted : ""; ?></div>
 
-	<input type="email" name="mail" id="mail" placeholder="Entrez votre adresse mail" value="<?= isset($_POST['mail']) ? $_POST['mail'] : '';?>" require>
+	<input type="email" name="mail" id="mail" placeholder="Entrez votre adresse mail" value="<?= isset($_POST['mail']) ? $_POST['mail'] : '';?>" require <?= $disabled; ?>>
 
-	<span class="secure-mdp">1 majuscule, 1 chiffre et 1 caractére spécial.</span>
+	<input type="text" name="pseudo" id="pseudo" placeholder="Entrez un pseudo" maxlength="25" value="<?= isset($_POST['pseudo']) ? $_POST['pseudo'] : '';?>" require <?= $disabled; ?>>
+	<span class="carac-max">25 caractére maximum</span>
+
+	<span class="secure-mdp">8 caractéres minimum : 1 majuscule/1 minuscule/1 chiffre/1 caractére spécial.</span>
 	<input type="password" name="pwd" 		 id="pwd" 		 placeholder="Entrez un mot de passe valide" require <?= $disabled; ?>>
 	<input type="password" name="pwd-repeat" id="pwd-repeat" placeholder="Validez votre mot de passe" require <?= $disabled; ?>>
-		<?= isset($errorMdp) ? $errorMdp : ""; ?>
+
+	<!-- <span style="font-size: 0.7em;color:red;font-weight:bold;"><?= isset($errorMdp) ? $errorMdp : ""; ?></span> -->
+	<span style="font-size: 0.7em;color:red;font-weight:bold;"><?= isset($errorStrengthPwd) ? $errorStrengthPwd : (isset($errorMdp) ? $errorMdp : ""); ?></span>
+	
 
 	<button type="submit" name="submit-new-user" <?= $disabled; ?>>Enregistrer</button>
 </form>

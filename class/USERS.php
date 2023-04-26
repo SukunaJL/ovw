@@ -21,6 +21,7 @@ class USERS {
 					id_user AS ID,
 					mail,
 					password,
+					pseudo,
 					is_super_admin,
 					is_admin,
 					avatar_hero_id
@@ -40,17 +41,19 @@ class USERS {
 		$this->ID 			= (int)$userInfos->ID;
 		$this->mail 		= $userInfos->mail;
 		$this->password 	= $userInfos->password;
+		$this->pseudo 		= $userInfos->pseudo;
 		$this->isSuperAdmin = (int)$userInfos->is_super_admin;
 		$this->isAdmin		= (int)$userInfos->is_admin;
 		$this->avatar		= $userInfos->avatar_hero_id;
 
 	}
 //*_________________________________
-	public function register($mail, $password){
+	public function register($mail, $password, $pseudo){
 		$sql ="	INSERT INTO
 					".DBNAME_PS."_ovw_users
 				SET
 					mail 	 = '".DB::escape($mail)."',
+					pseudo 	 = '".DB::escape($pseudo)."',
 					password = '".DB::escape(hash('sha256', $password, false))."'";
 
 
@@ -61,6 +64,7 @@ class USERS {
 
 			$_SESSION['ID'] = $user->id_user;
 			$_SESSION['email'] = $user->mail;
+			$_SESSION['pseudo'] = $user->pseudo;
 			$_SESSION['isSuperAdmin'] = $user->is_super_admin;
 			$_SESSION['isAdmin'] = $user->is_admin;
 			$_SESSION['avatar'] = $user->avatar_hero_id;
@@ -109,6 +113,7 @@ class USERS {
 		$sql ="	SELECT
 					id_user AS ID,
 					mail,
+					pseudo,
 					is_super_admin,
 					is_admin,
 					avatar_hero_id
@@ -124,6 +129,7 @@ class USERS {
 		if($result){
 			$_SESSION['ID'] = $result->ID;
 			$_SESSION['email'] = $result->mail;
+			$_SESSION['pseudo'] = $result->pseudo;
 			$_SESSION['isSuperAdmin'] = $result->is_super_admin;
 			$_SESSION['isAdmin'] = $result->is_admin;
 			$_SESSION['avatar'] = $result->avatar_hero_id;
