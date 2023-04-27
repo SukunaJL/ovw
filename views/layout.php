@@ -152,7 +152,9 @@ if(isset($_GET['logout']) && !empty($_GET['logout'])) {
 	<header>
 		<a href="http://www.sitetest.local/ovw/views/index.php"><h1 class="main-title">overwatch</h1></a>
 		<nav>
-			<a class="link-gestion" href="http://www.sitetest.local/ovw/views/links_gestion.php">GESTION DES DONNÉES</a>
+			<? if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']) { ?>
+				<a class="link-gestion" href="http://www.sitetest.local/ovw/views/links_gestion.php">Gestion des données/Admin</a>
+			<? } ?>
 			<a href="http://www.sitetest.local/ovw/views/list_hero.php">HEROS DATA</a>
 			<a href="http://www.sitetest.local/ovw/views/list_hero_art.php">ART-OF-HERO</a>
 			<a href="http://www.sitetest.local/ovw/views/list_maps.php">CARTES</a>
