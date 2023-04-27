@@ -195,4 +195,62 @@ class USERS {
 		}
 	}
 
+	//________________ ADMINISTRATION _________________________
+	static function allUsers(){
+		$sql = "SELECT
+					id_user,
+					mail,
+					pseudo,
+					is_super_admin,
+					is_admin
+				FROM
+					".DBNAME_PS."_ovw_users";
+
+		$result = DB::gets($sql);
+
+		if($result){
+			return $result;
+		} else {
+			return false;
+		}
+	}
+
+	public function updateAdmin($userID, $bool){
+		$sql ="	UPDATE
+					".DBNAME_PS."_ovw_users
+				SET
+					is_admin = ".(int)$bool."
+				WHERE
+					id_user = ".(int)$userID;
+
+		$result = DB::update($sql);
+		
+		if($result){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public function updateSuperAdmin($userID, $bool){
+		$sql ="	UPDATE
+					".DBNAME_PS."_ovw_users
+				SET
+					is_super_admin = ".(int)$bool."
+				WHERE
+					id_user = ".(int)$userID;
+
+		$result = DB::update($sql);
+		
+		if($result){
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+
+
+
+
+
 }

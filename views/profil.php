@@ -26,7 +26,7 @@ if(isset($_GET['deleteUserID'])){
 	$user = new USERS($_GET['deleteUserID']);
 	$result = $user->deleteAccount($_GET['deleteUserID']);
 	session_destroy();
-// Refresh aprés 1 seconde
+// Redirection a la page d'accueil aprés avoir supprimé son propre compte
 	echo '<meta http-equiv="refresh" content="1;URL=http://www.sitetest.local/ovw/views/index.php">';
 }
 

@@ -1,5 +1,9 @@
 <? include_once $_SERVER['DOCUMENT_ROOT']."../devt.loguy.fr/class/include.php";
 
+if(!isset($_SESSION['email']) || !$_SESSION['isAdmin']) {
+	echo '<meta http-equiv="refresh" content="0;URL=http://www.sitetest.local/ovw/views/index.php">';
+}
+
 require '../views/layout.php';
 
 ?>
@@ -35,7 +39,35 @@ require '../views/layout.php';
 	ol li {
 		padding: 0.1em;
 	}
+	.link-superadmin {
+		width: 50%;
+		margin-top: 2em;
+		margin-left: auto;
+		margin-right: auto;
+		padding: 0;
+		border: 2px double orangered;
+		border-radius: 0.3em;
+		background: dimgrey;
+	}
+	.link-superadmin a:hover {
+		color: black;
+		text-shadow: 0 0 .25rem gold, -.125rem -.125rem 1rem gold, .125rem .125rem 1rem gold;
+	}
+	.link-superadmin a {
+		display: flex;
+		justify-content: center;
+		text-decoration: none;
+		font-weight: bold;
+		width: 100%;
+		height: 100%;
+		padding: 0.5em;
+	}
 </style>
+<? if(!isset($_SESSION['email']) || !$_SESSION['isSuperAdmin']) { ?>
+	<div class="link-superadmin">
+		<a href="http://www.sitetest.local/ovw/views/superadmin.php">Espace superAdmin</a>
+	</div>
+<? } ?>
 
 <div class="main-gestion">
 	<a href="http://www.sitetest.local/ovw/views/update_hero.php" class="article-gestion">

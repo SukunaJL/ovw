@@ -1,5 +1,9 @@
 <? include_once $_SERVER['DOCUMENT_ROOT']."../devt.loguy.fr/class/include.php";
 
+if(!isset($_SESSION['email']) || !$_SESSION['isAdmin']) {
+	echo '<meta http-equiv="refresh" content="0;URL=http://www.sitetest.local/ovw/views/index.php">';
+}
+
 require '../class/HEROES.php';
 // require '../class/ROLES.php';
 require '../class/COUNTERS.php';

@@ -175,7 +175,7 @@ require '../views/layout.php';
 		flex-direction: row;
 		justify-content: space-around;
 	}
-	.fas {
+	.pouce {
 		width: 1em;
 		height: 1em;
 		border: 1px solid black;
@@ -357,7 +357,7 @@ if(isset($_POST['team-submit'])){
 			<div class="one-counter-result">
 				
 				<div class="counters-column">
-					<i class="fas fa-thumbs-up"></i>
+					<i class="fas fa-thumbs-up pouce"></i>
 					<? $counters = COUNTERS::getCounterStrongByHero($heroID);
 					foreach ($counters as $weakID) { 
 						$weak = new HEROES($weakID->id_hero_vs); ?>
@@ -365,7 +365,7 @@ if(isset($_POST['team-submit'])){
 					<? } ?> 
 				</div>
 				<div class="counters-column">
-					<i class="fas fa-thumbs-down"></i>
+					<i class="fas fa-thumbs-down pouce"></i>
 					<? $isCounters = COUNTERS::getCounterWeakByHero($heroID);
 					foreach ($isCounters as $strongID) { 
 						$strong = new HEROES($strongID->id_hero); ?>
