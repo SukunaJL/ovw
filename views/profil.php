@@ -21,7 +21,14 @@ if(isset($_POST['submit-bg'])){
 // Refresh aprés 1 seconde
 	echo '<meta http-equiv="refresh" content="1;URL='.$_SERVER['PHP_SELF'].'">';
 }
-	
+
+if(isset($_GET['deleteUserID'])){
+	$user = new USERS($_GET['deleteUserID']);
+	$result = $user->deleteAccount($_GET['deleteUserID']);
+	session_destroy();
+// Refresh aprés 1 seconde
+	echo '<meta http-equiv="refresh" content="1;URL=http://www.sitetest.local/ovw/views/index.php">';
+}
 
 ?>
 <style>
@@ -162,6 +169,21 @@ if(isset($_POST['submit-bg'])){
 		flex-direction: row;
 		justify-content: space-around;
 	}
+
+	.loader {
+		border: 8px solid #f3f3f3;
+		border-top: 8px solid #3498db;
+		border-radius: 50%;
+		width : 0.5em;
+		height: 0.5em;
+		animation: spin 1s linear infinite;
+		margin: auto;
+	}
+
+	@keyframes spin {
+		0% { transform: rotate(0deg); }
+		100% { transform: rotate(360deg); }
+	}
 </style>
 <h1>Profil</h1>
 
@@ -192,8 +214,13 @@ if(isset($_POST['submit-bg'])){
 				<? } ?>
 
 			</div>
-			<button class="submit-btn" name="submit-avatar" type="submit">Valider</button>
-
+			<button class="submit-btn" name="submit-avatar" type="submit">
+				<? if(isset($_POST['submit-avatar'])) { ?>
+					<div class="loader"></div>
+				<? } else { ?>
+					<div>Valider</div>
+				<? } ?>
+			</button>
 		</form>
 
 
@@ -211,11 +238,14 @@ if(isset($_POST['submit-bg'])){
 				<? } ?>
 
 			</div>
-			<button class="submit-btn" name="submit-bg" type="submit">Valider</button>
-
+			<button class="submit-btn" name="submit-bg" type="submit">
+				<? if(isset($_POST['submit-bg'])) { ?>
+					<div class="loader"></div>
+				<? } else { ?>
+					<div>Valider</div>
+				<? } ?>
+			</button>
 		</form>
-		
-	
 		
 	</div>
 	
@@ -238,7 +268,16 @@ if(isset($_POST['submit-bg'])){
 			</div>
 		</div>
 
-		<a class="deleteAccount" href="#">Supprimer ce compte</a>
+		<!-- <a class="deleteAccount" href="#">Supprimer ce compte</a> -->
+		<a class="deleteAccount" 
+		href="http://www.sitetest.local/ovw/views/profil.php?deleteUserID=<?= $_SESSION['ID']; ?>" 
+		onclick="return(confirm('Etes-vous sûr de vouloir supprimer votre compte?'));">
+			<? if(isset($_GET['deleteUserID'])) { ?>
+				<div class="loader"></div>
+			<? } else { ?>
+				<div>Supprimer mon compte</div>
+			<? } ?>
+		</a>
 	</div>
 
 

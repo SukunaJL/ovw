@@ -179,4 +179,20 @@ class USERS {
 		}
 	}
 
+	public function deleteAccount($userID){
+		$sql ="	DELETE
+				FROM
+					".DBNAME_PS."_ovw_users
+				WHERE
+					id_user = ".(int)$userID;
+
+		$result = DB::delete($sql);
+		
+		if($result){
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }

@@ -115,7 +115,7 @@ if(isset($_GET['logout']) && !empty($_GET['logout'])) {
 			background:none;
 		}
 		#avatar-user {
-			background: lightcyan;
+			background: lightblue;
 			padding: 0;
 			margin: 0.5em;
 			border: 2px solid black;
