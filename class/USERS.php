@@ -24,8 +24,8 @@ class USERS {
 					pseudo,
 					is_super_admin,
 					is_admin,
-					avatar_hero_id
-					
+					avatar,
+					background
 				FROM
 					".DBNAME_PS."_ovw_users
 				WHERE
@@ -44,7 +44,8 @@ class USERS {
 		$this->pseudo 		= $userInfos->pseudo;
 		$this->isSuperAdmin = (int)$userInfos->is_super_admin;
 		$this->isAdmin		= (int)$userInfos->is_admin;
-		$this->avatar		= $userInfos->avatar_hero_id;
+		$this->avatar		= $userInfos->avatar;
+		$this->background	= $userInfos->background;
 
 	}
 //*_________________________________
@@ -67,7 +68,8 @@ class USERS {
 			$_SESSION['pseudo'] = $user->pseudo;
 			$_SESSION['isSuperAdmin'] = $user->is_super_admin;
 			$_SESSION['isAdmin'] = $user->is_admin;
-			$_SESSION['avatar'] = $user->avatar_hero_id;
+			$_SESSION['avatar'] = $user->avatar;
+			$_SESSION['background'] = $user->background;
 			return true;
 		} else {
 			return false;
@@ -116,7 +118,8 @@ class USERS {
 					pseudo,
 					is_super_admin,
 					is_admin,
-					avatar_hero_id
+					avatar,
+					background
 				FROM
 					".DBNAME_PS."_ovw_users
 				WHERE
@@ -132,12 +135,48 @@ class USERS {
 			$_SESSION['pseudo'] = $result->pseudo;
 			$_SESSION['isSuperAdmin'] = $result->is_super_admin;
 			$_SESSION['isAdmin'] = $result->is_admin;
-			$_SESSION['avatar'] = $result->avatar_hero_id;
+			$_SESSION['avatar'] = $result->avatar;
+			$_SESSION['background'] = $result->background;
 			return true;
 		} else {
 			return false;
 		}
+	}
 
+	public function updateAvatarUser($avatar){
+		$sql ="	UPDATE
+					".DBNAME_PS."_ovw_users
+				SET
+					avatar = '".DB::escape($avatar)."'
+				WHERE
+					id_user = ".(int)$this->ID;
+
+		$result = DB::update($sql);
+		
+		if($result){
+			$_SESSION['avatar'] = $avatar;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function updateBackgroundUser($background){
+		$sql ="	UPDATE
+					".DBNAME_PS."_ovw_users
+				SET
+					background = '".DB::escape($background)."'
+				WHERE
+					id_user = ".(int)$this->ID;
+
+		$result = DB::update($sql);
+		
+		if($result){
+			$_SESSION['background'] = $background;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

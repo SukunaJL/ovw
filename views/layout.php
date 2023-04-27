@@ -18,7 +18,7 @@ if(isset($_GET['logout']) && !empty($_GET['logout'])) {
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" type="image/svg+xml" href="./public/src/icon.png"/>
+	<link rel="icon" type="image/svg+xml" href="../public/src/icon.png"/>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" crossorigin="anonymous">
 	<title>OVW-Tactik</title>
@@ -102,7 +102,8 @@ if(isset($_GET['logout']) && !empty($_GET['logout'])) {
 			border-radius: 0 0 0 1em;
 			border-bottom: 3px solid red;
 			border-left: 3px solid red;
-			background: black;
+			/* background: black; */
+			box-shadow: 0 0 .25rem black, -.125rem -.125rem 1rem black, .125rem .125rem 1rem black;
 		}
 		.login a {
 			background:none;
@@ -111,16 +112,20 @@ if(isset($_GET['logout']) && !empty($_GET['logout'])) {
 		.login a:hover {
 			text-shadow: 0 0 .25rem gold, -.125rem -.125rem 1rem gold, .125rem .125rem 1rem gold;
 			color: white;
+			background:none;
 		}
 		#avatar-user {
-			background: red;
+			background: lightcyan;
 			padding: 0;
 			margin: 0.5em;
+			border: 2px solid black;
 			border-radius: 100%;
 			min-width : 3em;
 			max-width : 3em;
 			min-height: 3em;
 			max-height: 3em;
+			
+			box-shadow: 0 0 .25rem black, -.125rem -.125rem 1rem black, .125rem .125rem 1rem black;
 		}
 		#avatar-user img {
 			display:flex;
@@ -136,6 +141,10 @@ if(isset($_GET['logout']) && !empty($_GET['logout'])) {
 		.logout {
 			font-size: 1.5em;
 			color: white;
+			background: radial-gradient(black, transparent);
+		}
+		.logout:hover {
+			background: none;
 		}
 	</style>
 </head>
@@ -149,12 +158,21 @@ if(isset($_GET['logout']) && !empty($_GET['logout'])) {
 			<a href="http://www.sitetest.local/ovw/views/list_maps.php">CARTES</a>
 			<a class="link-team" href="http://www.sitetest.local/ovw/views/team_compo.php">TEAM COMPO</a>
 			
-			<div class="login">
+			<div class="login" 
+			<?= (isset($_SESSION['background']) && $_SESSION['background'] !== NULL) ? 
+				"style=\"background-image: url('../public/maps/".$_SESSION['background']."');background-size: cover;background-position: center;\"" : "style=\"background:black\"" ?>
+			>
 				<? if(isset($_SESSION['email']) && !empty($_SESSION['email'])) { ?>
 					<a id="avatar-user" href="http://www.sitetest.local/ovw/views/profil.php">
 						<img src="../public/src/<?= $_SESSION['avatar']; ?>">
 					</a>
-					<div style="font-size: 0.9em;color:white;">Bienvenue <span style="font-weight:bold;font-size: 1.2em;"><?= $_SESSION['pseudo']; ?></span></div>
+					<div style="font-size: 0.9em;
+						color:white;
+						text-shadow: 0 0 1.25rem black, -.125rem -.125rem 1rem black, .125rem .125rem 1rem black;
+						background: radial-gradient(rgba(0, 0, 0, 0.5), transparent);">
+						Bienvenue 
+						<span style="font-weight:bold;font-size: 1.2em;"><?= $_SESSION['pseudo']; ?></span>
+					</div>
 					<a href="http://www.sitetest.local/ovw/views/index.php?logout=true">
 						<!-- Logout -->
 						<i class="fas fa-sign-out-alt logout"></i>

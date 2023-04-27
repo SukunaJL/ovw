@@ -9,7 +9,9 @@ if(isset($_POST['submit-login'])) {
 	$user = $u->login($_POST['mail'], $_POST['pwd']);
 
 	if($user) {
-		header("Location: http://www.sitetest.local/ovw/views/index.php");
+		// header("Location: http://www.sitetest.local/ovw/views/index.php");
+		echo '<meta http-equiv="refresh" content="0;URL=http://www.sitetest.local/ovw/views/index.php">';
+
 	} else {
 		$error = "mail ou mot de passe incorrect.";
 	}

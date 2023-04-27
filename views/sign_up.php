@@ -13,7 +13,7 @@ if(isset($_POST['submit-new-user'])) {
 		if($mailExisted) {
 			$errorMailExisted = "Cette adresse mail existe déja.";
 		} else {
-			
+
 			// Vérifie que le mot de passe contient au moins une majuscule
 			if (!preg_match('/[A-Z]/', $_POST['pwd'])) {
 				$errorStrengthPwd = "Votre mot de passe dois contenir au moins une majuscule.";
@@ -41,7 +41,8 @@ if(isset($_POST['submit-new-user'])) {
 				if($user) {
 					$valided = "Vous avez bien été enregisté. Vous allez être redirigé vers la page d'accueil";
 					$disabled = "disabled";
-					header("refresh:3;url=http://www.sitetest.local/ovw/views/index.php");
+					// header("refresh:3;url=http://www.sitetest.local/ovw/views/index.php");
+					echo '<meta http-equiv="refresh" content="2;URL=http://www.sitetest.local/ovw/views/index.php">';
 				} else {
 					$error = "une erreur est survenu.";
 				}
@@ -133,7 +134,9 @@ if(isset($_POST['submit-new-user'])) {
 <h1>Enregistrement</h1>
 
 <form class="form-signup" method="post">
-	<div class="valided"><?= isset($valided) ? $valided : ""; ?></div>
+	<? if(isset($valided)) { ?>
+		<div class="valided"><?= isset($valided) ? $valided : ""; ?></div>
+	<? } ?>
 	<div class="error"><?= isset($error) ? $error : ""; ?></div>
 	<div class="error"><?= isset($errorMailExisted) ? $errorMailExisted : ""; ?></div>
 

@@ -5,134 +5,153 @@ require '../class/USERS.php';
 
 
 $allImages = HEROES::getAllImagesHeroes();
-// DEBUG::printr($allImages);
+$allImagesMaps = MAPS::getAllImagesMaps();
 
 
+
+if(isset($_POST['submit-avatar'])){
+	$user = new USERS($_SESSION['ID']);
+	$result = $user->updateAvatarUser($_POST['avatar']);
+// Refresh aprés 1 seconde
+	echo '<meta http-equiv="refresh" content="1;URL='.$_SERVER['PHP_SELF'].'">';
+}
+if(isset($_POST['submit-bg'])){
+	$user = new USERS($_SESSION['ID']);
+	$result = $user->updateBackgroundUser($_POST['background']);
+// Refresh aprés 1 seconde
+	echo '<meta http-equiv="refresh" content="1;URL='.$_SERVER['PHP_SELF'].'">';
+}
+	
 
 ?>
 <style>
 	.block-profil {
 		width: 100%;
-		height: 25em;
+		height: 35em;
+		/* height: 100%; */
 		background: silver;
-		padding: 1em;
+		padding: 0.5em;
 		margin: auto;
 		border: 5px groove dimgrey;
 		border-radius: 1em;
-		margin-top: 5em;
 		box-shadow: 0 0 5.25rem black, -.125rem -.125rem 1rem black, .125rem .125rem 5rem black;
 
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
+		/* justify-content: space-between; */
 		align-items: center;
 	}
 	
 	h1 {
 		text-align: center;
-		margin-top: 1em;
 		color: white;
 	}
-	.error {
-		color: red;
-		font-weight: bold;
-		font-size: 1.2em;
-		margin-bottom: 1em;
-	}
-	/* _______________________________________ */
-	.appercu-banniere {
-		/* position: absolute; */
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		flex-direction: row;
-		top: 0;
-		right: 0;
-		width: 14em;
-		height: 3em;
-		padding: 0.5em;
-		padding-top: 1em;
-		border-radius: 0 0 0 1em;
-		border-bottom: 3px solid red;
-		border-left: 3px solid red;
-		background: black;
-		color:white;
-		text-align: center;
-	}
-	.appercu-banniere a {
-		background:none;
-		font-size: 1em;
-	}
-	.appercu-banniere a:hover {
-		text-shadow: 0 0 .25rem gold, -.125rem -.125rem 1rem gold, .125rem .125rem 1rem gold;
-		color: white;
-	}
-	#avatar-user {
-		background: red;
-		padding: 0;
-		margin: 0.5em;
-		border-radius: 100%;
-		min-width : 3em;
-		max-width : 3em;
-		min-height: 3em;
-		max-height: 3em;
-	}
-	#avatar-user img {
-		display:flex;
-		justify-content: center;
-		align-items: center;
-		width: 100%;
-		border-radius: 100%;
-
-	}
-	#avatar-user:hover {
-		box-shadow: 0 0 .25rem gold, -.125rem -.125rem 1rem gold, .125rem .125rem 1rem gold;
-	}
-	.logout {
-		font-size: 1.5em;
-		color: white;
-	}
-	/* ________________________________________________ */
 	
+
+	.block-modif {
+		height: 75%;
+		display: flex;
+		flex-direction: row;
+	}
+	.form-avatar {
+		text-align: center;
+		/* border: 1px solid green; */
+		background: radial-gradient(seagreen, transparent);
+		/* width: 33%; */
+	}
+	.form-bg {
+		text-align: center;
+		/* border: 1px solid green; */
+		background: radial-gradient(lightseagreen, transparent);
+		/* width: 33%; */
+	}
 	.avatar-choose {
 		width : 3em;
 		height: 3em;
+		/* padding: 0.5em; */
 		border: 1px solid black;
 		border-radius: 100%;
 		background: lightcyan;
 		margin: 0.5em;
+		text-align: center;
+
+	}
+	.avatar-choose:hover {
+		box-shadow: 0 0 .25rem orangered, -.125rem -.125rem 1rem orangered, .125rem .125rem 1rem orangered;
+	}
+	.avatar-choose img {
+		max-width : 3em;
+		max-height: 3em;
+		
+		border-radius: 100%;
 	}
 	.avatar-list {
 		display: flex;
 		flex-wrap: wrap; 
-		/* max-width: 50%;
-		min-width: 50%;
-		max-height:20%;
-		min-height:20%; */
+		height:90%;
+		overflow: auto;
 
-		overflow: hidden;
-
-		border: 1px solid red;
+		/* border: 1px solid red; */
+		border-top: 1px solid white;
+		border-bottom: 1px solid white;
 	}
-	.avatar-list img {
-		max-width : 100%;
-height : auto;
+
+	.bg-choose {
+		width : 7em;
+		height: 4em;
+		border: 1px solid black;
+		border-radius: 1em;
+		background: lightcyan;
+		margin: 0.5em;
+		text-align: center;
 
 	}
+	.bg-choose img {
+		/* max-width : 7em; */
+		/* max-height: 4em; */
+		width: 100%;
+		height: 100%;
+		border-radius: 1em;
+	}
+	.bg-choose:hover {
+		box-shadow: 0 0 .25rem orangered, -.125rem -.125rem 1rem orangered, .125rem .125rem 1rem orangered;
+	}
+	.bg-list {
+		display: flex;
+		flex-wrap: wrap; 
+		height:90%;
+		overflow: auto;
+
+		/* border: 1px solid red; */
+		border-top: 1px solid white;
+		border-bottom: 1px solid white;
+	}
+
 	input[type="radio"] {
 		display: none;
 	}
 	input[type="radio"]:checked + label {
 		/* width: 87.75px;
 		height: 75px; */
-		/* border: 5px ridge gold; */
-		background: green;
-		border-radius: 1em;
+		border: 1px solid red;
+		background: cyan;
+		box-shadow: 0 0 .25rem gold, -.125rem -.125rem 1rem gold, .125rem .125rem 1rem gold;
+		/* border-radius: 1em; */
+	}
+	.submit-btn {
+		padding: 0.3em;
+		margin-top: 0.5em;
+		border-radius: 0.2em;
+		width: 20%;
+		border: 3px outset black;
+	}
+	.submit-btn:hover {
+		border: 3px inset black;
 	}
 
 	.block-info {
 		width: 100%;
-		height: 0.5%;
+		height: 10%;
 		display: flex;
 		flex-direction: column;
 		border-top: 1px solid white;
@@ -147,57 +166,62 @@ height : auto;
 <h1>Profil</h1>
 
 <div class="block-profil">
-	<div class="appercu-banniere">
-		<a id="avatar-user" href="#">
-			<img src="../public/src/<?= $_SESSION['avatar']; ?>">
-		</a>
-		<div style="font-size: 0.9em;"><span>Bienvenue</span><br><span style="font-weight:bold;font-size: 1.2em;"><?= $_SESSION['pseudo']; ?></span></div>
-		<a href="#">
-			<i class="fas fa-sign-out-alt logout"></i>
-		</a>
-	</div>
+	<h4 style="margin: 0.5em;">Modifier apparence</h4>
 
+	<div class="block-modif">
 
-	<div>
-	
+		<form class="form-avatar" method="post">
+			<div class="avatar-list">
+				<? foreach($allImages as $img){ 
+					// DEBUG::printr($img);
+					$avatar = $img->avatar;
+					$cute   = 'spray/'.$img->id_hero.'/'.$img->cute;
+					$checkedCute = ($cute == $_SESSION['avatar']) ? "checked" : "";
+					$checkedAvatar = ($avatar == $_SESSION['avatar']) ? "checked" : "";
+					?>
+					
+					<input type="radio" id="<?= $avatar; ?>" name="avatar" value="<?= $avatar; ?>" <?= $checkedAvatar; ?>>
+					<label class="avatar-choose" for="<?= $avatar; ?>">
+						<img src="../public/src/<?= $avatar; ?>"/>
+					</label>
 
+					<input type="radio" id="<?= $cute; ?>" name="avatar" value="<?= $cute; ?>" <?= $checkedCute; ?>>
+					<label class="avatar-choose" for="<?= $cute; ?>">
+						<img src="../public/src/<?= $cute; ?>"/>
+					</label>
+				<? } ?>
 
-		<form class="avatar-list" method="post">
-			<h4>Modifier apparence</h4>
-			<? foreach($allImages as $img){ 
-				// DEBUG::printr($img);
-				$avatar = $img->avatar;
-				$fanart = 'fanart/'.$img->id_hero.'/'.$img->fanart;
-				$pixel  = 'spray/'.$img->id_hero.'/'.$img->pixel;
-				$cute   = 'spray/'.$img->id_hero.'/'.$img->cute;
-				?>
-				
-				<!-- <input type="radio" id="<?= $avatar; ?>" name="avatar" value="<?= $avatar; ?>">
-				<label for="<?= $avatar; ?>">
-					<img class="avatar-choose" src="../public/src/<?= $avatar; ?>"/>
-				</label>
+			</div>
+			<button class="submit-btn" name="submit-avatar" type="submit">Valider</button>
 
-				<input type="radio" id="<?= $fanart; ?>" name="avatar" value="<?= $fanart; ?>">
-				<label for="<?= $fanart; ?>">
-					<img class="avatar-choose" src="../public/src/<?= $fanart; ?>"/>
-				</label> -->
-
-				<!-- <input type="radio" id="<?= $pixel; ?>" name="avatar" value="<?= $pixel; ?>">
-				<label for="<?= $pixel; ?>">
-					<img class="avatar-choose" src="../public/src/<?= $pixel; ?>"/>
-				</label> -->
-
-				<input type="radio" id="<?= $cute; ?>" name="avatar" value="<?= $cute; ?>">
-				<label for="<?= $cute; ?>">
-					<img class="avatar-choose" src="../public/src/<?= $cute; ?>"/>
-				</label>
-			<? } ?>
 		</form>
+
+
+
+		<form class="form-bg" method="post">
+			<div class="bg-list">
+				<? foreach($allImagesMaps as $bg){ 
+					$checkedBg = ($bg == $_SESSION['background']) ? "checked" : "";
+					?>
+					
+					<input type="radio" id="<?= $bg; ?>" name="background" value="<?= $bg; ?>" <?= $checkedBg; ?>>
+					<label class="bg-choose" for="<?= $bg; ?>">
+						<img src="../public/maps/<?= $bg; ?>"/>
+					</label>
+				<? } ?>
+
+			</div>
+			<button class="submit-btn" name="submit-bg" type="submit">Valider</button>
+
+		</form>
+		
+	
+		
 	</div>
 	
 
 	<div class="block-info">
-		<h4>Informations personnelles</h4>
+		<h4 style="margin: 0.5em;">Informations personnelles</h4>
 
 		<div class="info">
 			<div>

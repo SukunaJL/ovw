@@ -172,6 +172,21 @@ class MAPS {
 		}
 	}
 
+	static function getAllImagesMaps(){
+		$sql ="	SELECT
+					avatar
+				FROM
+					".DBNAME_PS."_ovw_maps";
+				
+		$result = DB::gets($sql);
+
+		if($result){
+			return $result;
+		} else {
+			return false;
+		}
+	}
+
 }
 
 //*_________________________________
