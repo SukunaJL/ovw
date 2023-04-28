@@ -48,7 +48,7 @@ class USERS {
 		$this->background	= $userInfos->background;
 
 	}
-//*_________________________________
+//*________________ ENREGISTREMENT _________________
 	public function register($mail, $password, $pseudo){
 		$sql ="	INSERT INTO
 					".DBNAME_PS."_ovw_users
@@ -61,15 +61,17 @@ class USERS {
 		$result = DB::insert($sql);
 		
 		if($result){
+			
 			$user = $this::selectInfoBymail($mail);
+			// session_start();
 
-			$_SESSION['ID'] = $user->id_user;
-			$_SESSION['email'] = $user->mail;
-			$_SESSION['pseudo'] = $user->pseudo;
-			$_SESSION['isSuperAdmin'] = $user->is_super_admin;
-			$_SESSION['isAdmin'] = $user->is_admin;
-			$_SESSION['avatar'] = $user->avatar;
-			$_SESSION['background'] = $user->background;
+			$_SESSION['ID'] 			= $user->id_user;
+			$_SESSION['email'] 			= $user->mail;
+			$_SESSION['pseudo'] 		= $user->pseudo;
+			$_SESSION['isSuperAdmin'] 	= (int)$user->is_super_admin;
+			$_SESSION['isAdmin'] 		= (int)$user->is_admin;
+			$_SESSION['avatar'] 		= $user->avatar;
+			$_SESSION['background'] 	= $user->background;
 			return true;
 		} else {
 			return false;
@@ -111,6 +113,7 @@ class USERS {
 		}
 	}
 
+	//_____________ CONNEXION _______________
 	public function login($mail, $pwd){
 		$sql ="	SELECT
 					id_user AS ID,
@@ -130,13 +133,15 @@ class USERS {
 		$result = DB::get($sql);
 
 		if($result){
-			$_SESSION['ID'] = $result->ID;
-			$_SESSION['email'] = $result->mail;
-			$_SESSION['pseudo'] = $result->pseudo;
-			$_SESSION['isSuperAdmin'] = $result->is_super_admin;
-			$_SESSION['isAdmin'] = $result->is_admin;
-			$_SESSION['avatar'] = $result->avatar;
-			$_SESSION['background'] = $result->background;
+			// session_start();
+
+			$_SESSION['ID'] 			= (int)$result->ID;
+			$_SESSION['email'] 			= $result->mail;
+			$_SESSION['pseudo'] 		= $result->pseudo;
+			$_SESSION['isSuperAdmin'] 	= (int)$result->is_super_admin;
+			$_SESSION['isAdmin'] 		= (int)$result->is_admin;
+			$_SESSION['avatar'] 		= $result->avatar;
+			$_SESSION['background'] 	= $result->background;
 			return true;
 		} else {
 			return false;
@@ -204,7 +209,8 @@ class USERS {
 					is_super_admin,
 					is_admin
 				FROM
-					".DBNAME_PS."_ovw_users";
+					".DBNAME_PS."_ovw_users
+				ORDER BY id_user DESC";
 
 		$result = DB::gets($sql);
 
@@ -215,13 +221,38 @@ class USERS {
 		}
 	}
 
-	public function updateAdmin($userID, $bool){
-		$sql ="	UPDATE
+	static function isSuperAdminByUserID($userID){
+		$sql ="	SELECT
+					is_super_admin
+				FROM
 					".DBNAME_PS."_ovw_users
-				SET
-					is_admin = ".(int)$bool."
 				WHERE
 					id_user = ".(int)$userID;
+
+		$result = DB::get($sql);
+
+		if($result){
+			return $result;
+		} else {
+			return false;
+		}
+	}
+	public function updateAdmin($userID, $bool){
+		$sql ="	UPDATE
+				".DBNAME_PS."_ovw_users
+			SET
+				is_admin = ".(int)$bool;
+
+		// si le user est superAdmin, il passe uniquement admin en meme temps qu'il passe admin
+		$isSuperAdmin = static::isSuperAdminByUserID($userID);
+		if($isSuperAdmin){
+		$sql .=",
+				is_super_admin = ".(int)$bool;
+		}
+
+		$sql .="
+			WHERE
+				id_user = ".(int)$userID;
 
 		$result = DB::update($sql);
 		
@@ -231,13 +262,38 @@ class USERS {
 			return false;
 		}
 	}
-	public function updateSuperAdmin($userID, $bool){
-		$sql ="	UPDATE
+	static function isAdminByUserID($userID){
+		$sql ="	SELECT
+					is_admin
+				FROM
 					".DBNAME_PS."_ovw_users
-				SET
-					is_super_admin = ".(int)$bool."
 				WHERE
 					id_user = ".(int)$userID;
+
+		$result = DB::get($sql);
+
+		if($result){
+			return $result;
+		} else {
+			return false;
+		}
+	}
+	public function updateSuperAdmin($userID, $bool){
+		$sql ="	UPDATE
+				".DBNAME_PS."_ovw_users
+			SET
+				is_super_admin = ".(int)$bool;
+
+		// si le user n'est pas admin, il passe admin en meme temps qu'il passe superAdmin
+		$isAdmin = static::isAdminByUserID($userID);
+		if(!$isAdmin){
+		$sql .=",
+				is_admin = ".(int)$bool;
+		}
+
+		$sql .="
+			WHERE
+				id_user = ".(int)$userID;
 
 		$result = DB::update($sql);
 		

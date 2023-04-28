@@ -3,6 +3,10 @@
 require '../class/MAPS.php';
 require '../views/layout.php';
 
+if(!isset($_SESSION['email']) || !$_SESSION['isAdmin']) {
+	echo '<meta http-equiv="refresh" content="0;URL=http://www.sitetest.local/ovw/views/index.php">';
+} else {
+
 ?>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" crossorigin="anonymous">
 <style>
@@ -244,3 +248,4 @@ function handleFiles(files) {
 	}
 }
  </script>
+<? } ?>

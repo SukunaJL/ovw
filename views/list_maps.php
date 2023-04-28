@@ -126,7 +126,11 @@ require '../views/layout.php';
 		border: 2px solid black;
 		box-shadow: 0 0 .25rem black, -.125rem -.125rem 1rem black, .125rem .125rem 1rem black;
 	}
-
+	.link-info-type {
+		font-size: 0.7em;
+		color: red;
+		font-weight: bold;
+	}
 </style>
 <? 	$allMaps = MAPS::getsAllMaps();
 	$allTypeMaps = MAPS_TYPES::getsAllTypesMaps();
@@ -315,7 +319,7 @@ require '../views/layout.php';
 			<? }; }; ?>
 		</div>
 	</div>
-
+	<a class="link-info-type" href="http://www.sitetest.local/ovw/views/info_type_map.php">En savoir plus sur les differents types de carte >></a>
 	
 
 </div>

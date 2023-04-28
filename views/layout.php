@@ -1,12 +1,14 @@
 <? 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 if(isset($_GET['logout']) && !empty($_GET['logout'])) {
 	if($_GET['logout']) {
 		
 		session_destroy();
 		
-		header('Location: http://www.sitetest.local/ovw/views/index.php');
+		echo '<meta http-equiv="refresh" content="0;URL=http://www.sitetest.local/ovw/views/index.php">';
 	}
 }
 
@@ -155,6 +157,7 @@ if(isset($_GET['logout']) && !empty($_GET['logout'])) {
 			<? if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']) { ?>
 				<a class="link-gestion" href="http://www.sitetest.local/ovw/views/links_gestion.php">Gestion des données/Admin</a>
 			<? } ?>
+			
 			<a href="http://www.sitetest.local/ovw/views/list_hero.php">HEROS DATA</a>
 			<a href="http://www.sitetest.local/ovw/views/list_hero_art.php">ART-OF-HERO</a>
 			<a href="http://www.sitetest.local/ovw/views/list_maps.php">CARTES</a>
@@ -172,7 +175,7 @@ if(isset($_GET['logout']) && !empty($_GET['logout'])) {
 						color:white;
 						text-shadow: 0 0 1.25rem black, -.125rem -.125rem 1rem black, .125rem .125rem 1rem black;
 						background: radial-gradient(rgba(0, 0, 0, 0.5), transparent);">
-						Bienvenue 
+						Bienvenue <br>
 						<span style="font-weight:bold;font-size: 1.2em;"><?= $_SESSION['pseudo']; ?></span>
 					</div>
 					<a href="http://www.sitetest.local/ovw/views/index.php?logout=true">

@@ -1,11 +1,11 @@
 <? include_once $_SERVER['DOCUMENT_ROOT']."../devt.loguy.fr/class/include.php";
+require '../views/layout.php';
+require '../class/USERS.php';
 
-if(!isset($_SESSION['email']) || !$_SESSION['isSuperAdmin']) {
+if(!isset($_SESSION['email']) || !$_SESSION['isSuperAdmin'] || !$_SESSION['isAdmin']) {
 	echo '<meta http-equiv="refresh" content="0;URL=http://www.sitetest.local/ovw/views/index.php">';
 }
 
-require '../views/layout.php';
-require '../class/USERS.php';
 
 // mettre ou retirer un utilisateur en admin
 if(isset($_GET['user_id']) && isset($_GET['is_admin'])) {
@@ -171,6 +171,12 @@ if(isset($_GET['id_user_delete'])) {
 		background: lime;
 		box-shadow: 0 0 5.25rem lime, -.125rem -.125rem 1rem lime, .125rem .125rem 5rem lime;
 	}
+
+	.tr-is-my-session {
+		opacity: 0.5;
+		pointer-events: none;
+		background: black !important;
+	}
 </style>
 
 <table>
@@ -191,13 +197,14 @@ if(isset($_GET['id_user_delete'])) {
 		if($allUsers) {
 			foreach($allUsers as $user){ 
 				// DEBUG::printr($heroSkill);
+				$isMySession = $_SESSION['email'] === $user->mail ? "tr-is-my-session" : "";
 				?>
-				<tr>
+				<tr class="<?= $isMySession; ?>">
 					<td><?= $user->id_user; ?></td>
 					<td><?= $user->mail; ?></td>
 					<td><?= $user->pseudo; ?></td>
 					<td>
-						<div class="socle">
+						<div class="socle" disabled>
 							<a href="http://www.sitetest.local/ovw/views/superadmin.php?user_id=<?= $user->id_user; ?>&is_admin=<?= $user->is_admin ? 0 : 1 ; ?>"
 							class="led <?= $user->is_admin ? "light-green" : "" ; ?>"></a>
 						</div>
@@ -209,7 +216,8 @@ if(isset($_GET['id_user_delete'])) {
 						</div>	
 					</td>
 					<td>
-						<a class="link-delete" 
+						<a class="link-delete"
+						onclick="return(confirm('Etes-vous sûr de vouloir supprimer le compte : \n Numéro : <?= $user->id_user; ?> \n Pseudo  : <?= $user->pseudo; ?> \n E-mail    : <?= $user->mail; ?> \n ?'));"
 						href="http://www.sitetest.local/ovw/views/superadmin.php?id_user_delete=<?= $user->id_user; ?>">
 							<i class="fas fa-trash-alt"></i>
 						</a>

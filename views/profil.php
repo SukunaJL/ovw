@@ -3,6 +3,9 @@
 require './layout.php';
 require '../class/USERS.php';
 
+if(!isset($_SESSION['email'])) {
+	echo '<meta http-equiv="refresh" content="0;URL=http://www.sitetest.local/ovw/views/index.php">';
+} else {
 
 $allImages = HEROES::getAllImagesHeroes();
 $allImagesMaps = MAPS::getAllImagesMaps();
@@ -282,3 +285,4 @@ if(isset($_GET['deleteUserID'])){
 
 
 </div>
+<? } ?>

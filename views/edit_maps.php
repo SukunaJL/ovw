@@ -1,11 +1,12 @@
 <? include_once $_SERVER['DOCUMENT_ROOT']."../devt.loguy.fr/class/include.php";
+require '../class/MAPS.php';
+require '../views/layout.php';
 
 if(!isset($_SESSION['email']) || !$_SESSION['isAdmin']) {
 	echo '<meta http-equiv="refresh" content="0;URL=http://www.sitetest.local/ovw/views/index.php">';
-}
+} else {
 
-require '../class/MAPS.php';
-require '../views/layout.php';
+
 
 ?>
 <style>
@@ -366,3 +367,4 @@ require '../views/layout.php';
 	
 
 </div>
+<? } ?>
