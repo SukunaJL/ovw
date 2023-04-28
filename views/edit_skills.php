@@ -307,7 +307,7 @@ if(isset($_GET['id_skill'])) {
 			<a class="
 			<?= isset($_GET['id_hero']) && $_GET['id_hero'] == $hero->id_hero ? "hero-on-list-selected" : "hero-on-list"; ?>"
 			href="http://www.sitetest.local/ovw/views/edit_skills.php?id_hero=<?= $hero->id_hero; ?>" 
-				style="background:linear-gradient(to top, transparent, transparent),0% url('../public/src/<?= $hero->avatar; ?>');">
+				style="background:linear-gradient(to top, transparent, transparent),0% url('../public/src/<?= $hero->avatar; ?>');background-size: cover;">
 				<? if(strlen($hero->name) > 10) {?>
 					<span class="
 					<?= isset($_GET['id_hero']) && $_GET['id_hero'] == $hero->id_hero ? "name-hero-list-selected" : "name-hero-list"; ?>"

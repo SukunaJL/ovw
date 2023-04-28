@@ -61,11 +61,14 @@ if(isset($_GET['logout']) && !empty($_GET['logout'])) {
 			text-align: center;
 		}
 		nav a {
+			position: relative;
+
 			font-size: 1.5em;
 			text-decoration: none;
 			color:white;
 			font-weight: bold;
 			padding: 0.5em;
+			margin-right: 0.2em;
 			background: orangered;
 			border-radius: 0 0 1em 1em;
 		}
@@ -117,7 +120,7 @@ if(isset($_GET['logout']) && !empty($_GET['logout'])) {
 			background:none;
 		}
 		#avatar-user {
-			background: lightblue;
+			background: rgba(173, 216, 230, 0.5);
 			padding: 0;
 			margin: 0.5em;
 			border: 2px solid black;
@@ -148,21 +151,84 @@ if(isset($_GET['logout']) && !empty($_GET['logout'])) {
 		.logout:hover {
 			background: none;
 		}
+		.icon-userLock {
+			position: absolute;
+			top: 75%;
+			left: 40%;
+
+			width: 1em;
+			height: 1em;
+			font-size: 0.5em;
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			padding: 0.5em;
+			border: 1px solid black;
+			border-radius: 100% !important;
+			background: lightgreen;
+			color: black;
+		}
+		.link-locked:hover::before {
+			content: "Veuillez vous connectez pour accéder a cette page.";
+			position: absolute;
+			z-index: 10;
+			top: 1em;
+			left: 1em;
+			/* transform: translate(-50%, 0); */
+			width:10em;
+			background-color: rgba(0, 0, 0, 0.5);
+			border-radius: 1em;
+			border: 2px solid black;
+			padding: 0.5em;
+			font-size: 0.6em;
+			color: white;
+			padding: 5px;
+			text-shadow: 0 0 .25rem black, -.125rem -.125rem 1rem black, .125rem .125rem 1rem black;
+
+			-webkit-animation: fadeInFromOpacityTrue 0.5s ease-in-out;
+		}
+		@keyframes fadeInFromOpacityTrue {
+			0% {
+				opacity: 0;
+			}
+			100% {
+				opacity: 1;
+			}
+		}
 	</style>
 </head>
 <body>
 	<header>
 		<a href="http://www.sitetest.local/ovw/views/index.php"><h1 class="main-title">overwatch</h1></a>
 		<nav>
+			<!-- ESPACE ADMIN  -->
 			<? if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin']) { ?>
 				<a class="link-gestion" href="http://www.sitetest.local/ovw/views/links_gestion.php">Gestion des données/Admin</a>
 			<? } ?>
-			
+			<!-- PAGE DES HEROS  -->
 			<a href="http://www.sitetest.local/ovw/views/list_hero.php">HEROS DATA</a>
-			<a href="http://www.sitetest.local/ovw/views/list_hero_art.php">ART-OF-HERO</a>
+			<!-- PAGE HERO-ART  -->
+			<a class="<?= (!isset($_SESSION['email']) || empty($_SESSION['email'])) ? "link-locked" : ""; ?>"
+			href="<?= (!isset($_SESSION['email']) || empty($_SESSION['email'])) ? "http://www.sitetest.local/ovw/views/log_in.php" : "http://www.sitetest.local/ovw/views/list_hero_art.php"; ?>">
+				ART-OF-HERO
+				<? if(!isset($_SESSION['email']) || empty($_SESSION['email'])) { ?>
+					<i class="fas fa-user-lock icon-userLock"></i>
+				<? } ?>
+			</a>
+			<!-- PAGE CARTES  -->
 			<a href="http://www.sitetest.local/ovw/views/list_maps.php">CARTES</a>
-			<a class="link-team" href="http://www.sitetest.local/ovw/views/team_compo.php">TEAM COMPO</a>
+			<!-- PAGE COMPOSITION DES EQUIPES -->
+			<a class="link-team <?= (!isset($_SESSION['email']) || empty($_SESSION['email'])) ? "link-locked" : ""; ?>" 
+			href="<?= (!isset($_SESSION['email']) || empty($_SESSION['email'])) ? "http://www.sitetest.local/ovw/views/log_in.php" : "http://www.sitetest.local/ovw/views/team_compo.php"; ?>">
+				TEAM COMPO
+				<? if(!isset($_SESSION['email']) || empty($_SESSION['email'])) { ?>
+					<i class="fas fa-user-lock icon-userLock"></i>
+				<? } ?>
+			</a>
 			
+			<!-- ESPACE CONNEXION -->
 			<div class="login" 
 			<?= (isset($_SESSION['background']) && $_SESSION['background'] !== NULL) ? 
 				"style=\"background-image: url('../public/maps/".$_SESSION['background']."');background-size: cover;background-position: center;\"" : "style=\"background:black\"" ?>
@@ -183,8 +249,9 @@ if(isset($_GET['logout']) && !empty($_GET['logout'])) {
 						<i class="fas fa-sign-out-alt logout"></i>
 					</a>
 				<? } else { ?>
-					<a href="http://www.sitetest.local/ovw/views/log_in.php">Connecter</a>
-					<a href="http://www.sitetest.local/ovw/views/sign_up.php" style="border-left: 1px double silver;border-radius:0;">Enregistrer</a>
+					<a style="color:lightgreen;" href="http://www.sitetest.local/ovw/views/log_in.php">Connecter</a>
+					<hr style="transform:rotate(90deg);width: 50%;">
+					<a style="color:lightgreen;" href="http://www.sitetest.local/ovw/views/sign_up.php">Enregistrer</a>
 				<? } ?>
 			</div>
 			

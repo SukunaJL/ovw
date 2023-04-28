@@ -5,6 +5,10 @@ require '../class/HEROES.php';
 require '../class/COUNTERS.php';
 require '../views/layout.php';
 
+if(!isset($_SESSION['email']) || empty($_SESSION['email'])) {
+	echo '<meta http-equiv="refresh" content="0;URL=http://www.sitetest.local/ovw/views/index.php">';
+} else {
+
 ?>
 <style>
 	body {
@@ -470,3 +474,4 @@ $(document).ready(function(e){
 	});
 });
 </script>
+<? } ?>
