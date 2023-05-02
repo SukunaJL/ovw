@@ -15,13 +15,12 @@ require './layout.php';
 		justify-content: center;
 		align-items: center;
 		margin: auto;
-		padding: 5em;
+
+		margin-top: 10%;
 		/* background: radial-gradient(white, white, grey, grey); */
 	}
 	.index-logo img {
-		/* border: 1px solid red; */
-		/* border-radius: 100%; */
-		width: 130%;
+		width: 100vh;
 		border-radius: 2em;
 		border: 0.5em solid black;
 		box-shadow: 0 0 5.25rem black, -.125rem -.125rem 1rem black, .125rem .125rem 5rem black;

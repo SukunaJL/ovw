@@ -47,7 +47,7 @@ if(isset($_GET['logout']) && !empty($_GET['logout'])) {
 			left: -2%;
 			top:10%;
 			border-radius: 0 1em 1em 0;
-			padding: 0.3em;
+			padding: 0.5em;
 			background : -webkit-linear-gradient(top, orangered, red);
 			border: 5px groove orangered;
 		}
