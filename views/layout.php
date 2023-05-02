@@ -171,21 +171,21 @@ if(isset($_GET['logout']) && !empty($_GET['logout'])) {
 			color: black;
 		}
 		.link-locked:hover::before {
-			content: "Veuillez vous connectez pour accéder a cette page.";
+			content: "Une connexion est requise pour accéder a cette page.";
 			position: absolute;
 			z-index: 10;
 			top: 1em;
 			left: 1em;
-			/* transform: translate(-50%, 0); */
 			width:10em;
-			background-color: rgba(0, 0, 0, 0.5);
+			background-color: rgba(0, 0, 0, 0.7);
 			border-radius: 1em;
-			border: 2px solid black;
+			border: 3px solid red;
+			color: lightgreen;
 			padding: 0.5em;
 			font-size: 0.6em;
-			color: white;
 			padding: 5px;
 			text-shadow: 0 0 .25rem black, -.125rem -.125rem 1rem black, .125rem .125rem 1rem black;
+			box-shadow: 0 0 .25rem black, -.125rem -.125rem 1rem black, .125rem .125rem 1rem black;
 
 			-webkit-animation: fadeInFromOpacityTrue 0.5s ease-in-out;
 		}
